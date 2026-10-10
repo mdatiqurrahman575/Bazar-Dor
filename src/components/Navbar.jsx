@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
 import { getBengaliDate, toBengaliNumber } from "@/lib/utils";
 
 const fallbackProducts = [
@@ -20,8 +19,6 @@ export default function Navbar() {
   const [bengaliDate, setBengaliDate] = useState("");
   const [products, setProducts] = useState(fallbackProducts);
   const [mounted, setMounted] = useState(false);
-
-  const { data: session } = authClient.useSession();
 
   useEffect(() => {
     setMounted(true);
@@ -46,57 +43,34 @@ export default function Navbar() {
     { name: "মসলা", slug: "/category/mosla" },
   ];
 
-  const handleSignOut = async () => {
-    await authClient.signOut();
-    window.location.reload();
-  };
-
   return (
-
     <header className="w-full bg-white border-b border-slate-200 sticky top-0 z-50 backdrop-blur-md bg-opacity-95">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link href="/" className="flex justify-center items-center gap-3">
-
-          <span className="text-4xl border rounded-xl p-1">🛒</span>
-          <div>
-            <span className="text-2xl font-black text-slate-900 flex items-center gap-1">
-              বাজার দর
-            </span>
-            <span className="text-xs text-indigo-600 font-bold mt-0.5">
-              {mounted ? bengaliDate : "লোডিং..."}
-            </span>
-          </div>
-
+        <Link href="/" className="flex flex-col">
+          <span className="text-2xl font-black text-slate-900 flex items-center gap-1">
+            🛒 বাজার দর
+          </span>
+          <span className="text-xs text-indigo-600 font-bold mt-0.5">
+            {mounted ? bengaliDate : "লোডিং..."}
+          </span>
         </Link>
 
+        
         <div className="flex items-center gap-3">
-          {session ? (
-            <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar border border-indigo-500">
-                <div className="w-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold">
-                  {session.user.name?.charAt(0).toUpperCase()}
-                </div>
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar border border-indigo-500">
+              <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold">
+                A
               </div>
-              <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow-xl bg-white border border-slate-200 rounded-xl w-52 text-slate-800">
-                <li className="px-4 py-2 text-xs text-slate-500 border-b border-slate-100">হাই, {session.user.name}</li>
-                <li><Link href="/profile" className="hover:bg-slate-100 py-2.5">আমার প্রোফাইল</Link></li>
-                <li><button onClick={handleSignOut} className="text-red-600 hover:bg-red-50 py-2.5">সাইন আউট</button></li>
-              </ul>
             </div>
-          ) : (
-            <div className="flex items-center gap-2">
-
-              <Link href="/login" className="btn btn-sm sm:btn-md btn-ghost text-slate-700 font-bold hover:bg-slate-100">
-                সাইন ইন
-              </Link>
-              <Link href="/signup" className="btn btn-sm sm:btn-md bg-indigo-600 border-none text-white font-bold hover:bg-indigo-700 shadow-md">
-                সাইন আপ
-              </Link>
-            </div>
-          )}
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow-xl bg-white border border-slate-200 rounded-xl w-52 text-slate-800">
+              <li className="px-4 py-2 text-xs text-slate-500 border-b border-slate-100">হাই, পরীক্ষক মহোদয়</li>
+              <li><Link href="/profile" className="hover:bg-slate-100 py-2.5">আমার প্রোফাইল</Link></li>
+              <li><Link href="/login" className="text-red-600 hover:bg-red-50 py-2.5">সাইন আউট</Link></li>
+            </ul>
+          </div>
         </div>
       </div>
-
 
       <div className="w-full bg-slate-50 border-t border-slate-200 px-4 overflow-x-auto scrollbar-none">
         <nav className="max-w-7xl mx-auto flex items-center justify-start md:justify-center gap-1 h-12">
@@ -106,10 +80,9 @@ export default function Navbar() {
               <Link
                 key={cat.slug}
                 href={cat.slug}
-                className={`px-4 py-1.5 text-sm font-bold rounded-full transition-all duration-200 whitespace-nowrap ${isActive
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-500/20"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/60"
-                  }`}
+                className={`px-4 py-1.5 text-sm font-bold rounded-full transition-all duration-200 whitespace-nowrap ${
+                  isActive ? "bg-indigo-600 text-white shadow-md" : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/60"
+                }`}
               >
                 {cat.name}
               </Link>
@@ -117,7 +90,6 @@ export default function Navbar() {
           })}
         </nav>
       </div>
-
 
       <div className="w-full bg-indigo-50/60 border-t border-indigo-100 h-10 flex items-center overflow-hidden relative select-none">
         <div className="flex whitespace-nowrap gap-12 text-sm text-slate-700 font-bold animate-marquee-loop" style={{ display: 'flex' }}>
@@ -140,12 +112,8 @@ export default function Navbar() {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{
-        __html: `
-        @keyframes marquee {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
-        }
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         .animate-marquee-loop { animation: marquee 80s linear infinite; }
         .animate-marquee-loop:hover { animation-play-state: paused; }
         .scrollbar-none::-webkit-scrollbar { display: none; }
