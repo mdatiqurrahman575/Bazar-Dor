@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+বাজার দর (Bazar Dor) - Live Market Price Tracker
 
-## Getting Started
+হলো নিত্যপ্রয়োজনীয় জিনিসপত্রের দামের ওঠানামা ট্র্যাক করার জন্য একটি রেসপন্সিভ এবং সুরক্ষিত ওয়েব অ্যাপ্লিকেশন। বাজারের কৃত্রিম সংকট এবং অতিরিক্ত মূল্যের হাত থেকে সাধারণ মানুষকে সচেতন রাখতে প্রতি মুহূর্তের সঠিক বাজার মূল্য ও দামের তারতম্য প্রদর্শন করাই এই প্রজেক্টের মূল লক্ষ্য।
 
-First, run the development server:
+            
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+ব্যবহৃত প্রযুক্তি সমূহ (Technologies Used)
+Framework:Next.js (App Router)
+Styling & Components:Tailwind CSS & DaisyUI
+Authentication & Session:Better Auth (Secure Session Client)
+Database Management:MongoDB Atlas (Cloud Clusters Database)
+State & Notification:React Hooks & React Hot Toast
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+প্রজেক্টের ৫টি মূল আকর্ষণ ও ফিচার (Key Features)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ডাইনামিক লাইভ প্রাইস টিকার (Infinite Scrolling Marquee)
+নেভবারের ঠিক নিচে একটি লাইভ ইনফিনিট স্ক্রোলিং স্ট্রিপ রয়েছে, যা এপিআই (API) থেকে রিয়েল-টাইম তথ্য নিয়ে প্রতিটি পণ্যের ইমোজি, নাম, একক এবং দাম বৃদ্ধির/কমে যাওয়ার পার্সেন্টেজ (▲/▼ %) অনবরত প্রদর্শন করতে থাকে। মাউস হোভার করলে টিকারটি সাময়িকভাবে থেমে যায় যাতে ইউজার সহজে দাম পড়তে পারেন।
 
-## Learn More
+স্বয়ংক্রিয় বাংলা তারিখ ও বঙ্গাব্দ সাল (Dynamic Bengali Calendar)
+অ্যাপ্লিকেশনের গ্লোবাল হেডার বা লোগোর নিচে এবং হোম পেজে কম্পিউটারের কারেন্ট সিস্টেম টাইম থেকে আজকের বার, দিন এবং মাস হিসাব করে ইংরেজি খ্রিষ্টাব্দকে স্বয়ংক্রিয়ভাবে বাংলা বঙ্গাব্দে রূপান্তর করে নিখুঁত একটি ডাইনামিক বাংলা তারিখ প্রদর্শন করে।
 
-To learn more about Next.js, take a look at the following resources:
+সুরক্ষিত প্রোডাক্ট ডিটেইলস এবং বাজারভিত্তিক তুলনা (Protected Dynamic Route)
+পণ্যভিত্তিক বিস্তারিত পেজটি (`/product/[id]`) একটি প্রটেক্টড রুট। কোনো ইউজার লগইন ছাড়া এই পেজে প্রবেশ করতে চাইলে Better Auth সেশন গার্ড তাকে আটকে দেয় এবং টোস্ট নোটিফিকেশন দেখিয়ে লগইন পেজে রিডাইরেক্ট করে। পেজের ভেতরে ঢাকার প্রধান ৪টি কাঁচাবাজারের খুচরা মূল্যের একটি নিখুঁত তুলনামূলক ছক প্রদর্শন করা হয়।
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+বাংলা সংখ্যা ভিত্তিক নিখুঁত সর্টিং লজিক (C1 Sorting Challenge)
+क্যাটাগরি পেজে পণ্যের নামের পাশে "সাজান" (Sort) অপশন রয়েছে। পণ্যের দামগুলো বাংলা অক্ষরে এবং বাংলা সংখ্যায় লেখা থাকলেও, সর্টিং সিস্টেম সেটিকে স্ট্রিং হিসেবে না নিয়ে ব্যাকএন্ডের আসল গাণিতিক ভ্যালু (Numeric Value) অনুযায়ী "দাম: কম থেকে বেশি" এবং "দাম: বেশি থেকে কম" সিরিয়ালে নিখুঁতভাবে সাজিয়ে দেয়।
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ নিরাপদ প্রোফাইল আপডেট এবং ফেইল-সেফ মেকানিজম (C3 Profile Update)
+প্রোফাইল রুটে Better Auth-এর অফিশিয়াল কনсеপ্ট `updateUser` ব্যবহার করে সরাসরি MongoDB ডাটাবেজে ইউজারের নাম লাইভ আপডেট করা যায়। এছাড়াও, মূল এপিআই সার্ভার ডাউন থাকলেও অ্যাপ্লিকেশনটি যেন ক্রাশ না করে, তার জন্য সম্পূর্ণ প্রজেক্টে রিঅ্যাক্ট সাসপেন্স (`<Suspense>`) এবং ফলব্যাক লোকাল ব্যাকআপ ডেটা মেকানিজম ব্যবহার করা হয়েছে।
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
